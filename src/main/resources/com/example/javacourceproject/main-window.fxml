@@ -1,69 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="594.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javacourceproject.fxController.MainWindow">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javacourceproject.fxController.MainWindow">
     <children>
-        <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="650.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Shop">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
+                <Tab fx:id="shopTab" disable="true" text="Shop">
+                    <fx:include source="shopTab.fxml" />
                 </Tab>
-                <Tab text="Products">
-                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="502.0" prefWidth="600.0">
-                        <ListView fx:id="productAdminList" layoutX="24.0" layoutY="14.0" prefHeight="318.0" prefWidth="200.0" />
-                        <RadioButton fx:id="smartphoneRadioButton" layoutX="236.0" layoutY="15.0" mnemonicParsing="false" onAction="#radioButtonWidgetsActivation" selected="true" text="Smartphone">
-                            <toggleGroup>
-                                <ToggleGroup fx:id="products" />
-                            </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="caseRadioButton" layoutX="501.0" layoutY="15.0" mnemonicParsing="false" onAction="#radioButtonWidgetsActivation" text="Case" toggleGroup="$products" />
-                        <RadioButton fx:id="headphonesRadioButton" layoutX="367.0" layoutY="15.0" mnemonicParsing="false" onAction="#radioButtonWidgetsActivation" text="Headphones" toggleGroup="$products" />
-                        <TextField fx:id="productTitleField" layoutX="236.0" layoutY="45.0" minHeight="25.0" prefWidth="150.0" promptText="Title" />
-                        <TextArea fx:id="productDescriptionField" layoutX="236.0" layoutY="90.0" prefHeight="200.0" prefWidth="150.0" promptText="Description" />
-                        <TextField fx:id="smartphoneDiagonalField" layoutX="420.0" layoutY="45.0" promptText="Display diagonal" />
-                        <TextField fx:id="smartphoneBatteryCapacityField" layoutX="420.0" layoutY="90.0" promptText="Battery capacity" />
-                        <TextField fx:id="smartphoneMemoryCapacityField" layoutX="420.0" layoutY="135.0" promptText="Memory capacity" />
-                        <TextField fx:id="smartphoneColorField" layoutX="420.0" layoutY="180.0" promptText="Color" />
-                  <TextField fx:id="headphonesTypeField" layoutX="421.0" layoutY="45.0" promptText="Type" visible="false" />
-                  <TextField fx:id="headphonesBatteryCapacityField" layoutX="420.0" layoutY="90.0" promptText="Battery capacity" visible="false" />
-                  <TextField fx:id="headphonesColorField" layoutX="420.0" layoutY="135.0" promptText="Color" visible="false" />
-                  <TextField fx:id="caseTypeField" layoutX="420.0" layoutY="45.0" promptText="Type" visible="false" />
-                  <TextField fx:id="caseMaterialField" layoutX="420.0" layoutY="90.0" promptText="Material" visible="false" />
-                  <TextField fx:id="caseColorField" layoutX="420.0" layoutY="135.0" promptText="Color" visible="false" />
-                  <Button layoutX="286.0" layoutY="342.0" mnemonicParsing="false" onAction="#addRecord" text="Add" />
-                  <Button layoutX="386.0" layoutY="342.0" mnemonicParsing="false" onAction="#updateRecord" text="Update" />
-                  <Button layoutX="500.0" layoutY="342.0" mnemonicParsing="false" onAction="#deleteRecord" text="Delete" />
-                  <TextField fx:id="quantityField" layoutX="236.0" layoutY="306.0" promptText="Quantity" />
-                  <TextField fx:id="priceSmartphoneField" layoutX="421.0" layoutY="228.0" promptText="Price" />
-                  <TextField fx:id="priceHeadphonesField" layoutX="420.0" layoutY="180.0" promptText="Price" visible="false" />
-                  <TextField fx:id="priceCaseField" layoutX="420.0" layoutY="180.0" promptText="Price" visible="false" />
-                    </AnchorPane>
+                <Tab fx:id="productTab" disable="true" text="Products">
+                    <fx:include source="productTab.fxml" />
                 </Tab>
-                <Tab text="Users">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
+                <Tab fx:id="userTab" text="Users">
+                    <fx:include source="userTab.fxml" />
                 </Tab>
-                <Tab text="Orders">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
+                <Tab disable="true" text="Orders">
+
                 </Tab>
-                <Tab text="Warehouse">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
+                <Tab fx:id="warehouseTab" disable="true" text="Warehouse">
+
                 </Tab>
             </tabs>
         </TabPane>

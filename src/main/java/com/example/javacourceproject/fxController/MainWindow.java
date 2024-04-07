@@ -1,150 +1,95 @@
 package com.example.javacourceproject.fxController;
 
-import com.example.javacourceproject.model.Cases;
-import com.example.javacourceproject.model.Headphones;
-import com.example.javacourceproject.model.Product;
-import com.example.javacourceproject.model.Smartphones;
+
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
+import javafx.scene.layout.AnchorPane;
+import lombok.Getter;
+import lombok.Setter;
 
-public class MainWindow {
-    public ListView<Product> productAdminList;
-    public TextField priceSmartphoneField;
-    public TextField priceHeadphonesField;
-    public TextField priceCaseField;
-    @FXML
-    private RadioButton smartphoneRadioButton;
-    public RadioButton headphonesRadioButton;
-    public RadioButton caseRadioButton;
-    public TextField productTitleField;
-    public TextArea productDescriptionField;
-    public TextField quantityField;
-    public TextField priceField;
-    public TextField smartphoneMemoryCapacityField;
-    public TextField smartphoneColorField;
-    @FXML
-    private TextField smartphoneDiagonalField;
-    @FXML
-    private TextField smartphoneBatteryCapacityField;
-    public TextField headphonesTypeField;
-    public TextField headphonesBatteryCapacityField;
-    public TextField headphonesColorField;
-    public TextField caseTypeField;
-    public TextField caseMaterialField;
-    public TextField caseColorField;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+@Getter
+@Setter
+public class MainWindow implements Initializable {
+    @Getter
+    @Setter
+    private static MainWindow instance;
 
     @FXML
-    private void radioButtonWidgetsActivation() {
-        if (smartphoneRadioButton.isSelected()) {
-            smartphoneDiagonalField.setVisible(true);
-            smartphoneBatteryCapacityField.setVisible(true);
-            smartphoneMemoryCapacityField.setVisible(true);
-            smartphoneColorField.setVisible(true);
-            priceSmartphoneField.setVisible(true);
-        } else {
-            smartphoneDiagonalField.setVisible(false);
-            smartphoneBatteryCapacityField.setVisible(false);
-            smartphoneMemoryCapacityField.setVisible(false);
-            smartphoneColorField.setVisible(false);
-            priceSmartphoneField.setVisible(false);
-        }
+    Tab shopTab;
+    @FXML
+    Tab productTab;
+    @FXML
+    Tab warehouseTab;
+    @FXML
+    Tab userTab;
 
-        if (headphonesRadioButton.isSelected()) {
-            headphonesTypeField.setVisible(true);
-            headphonesBatteryCapacityField.setVisible(true);
-            headphonesColorField.setVisible(true);
-            priceHeadphonesField.setVisible(true);
-        } else {
-            headphonesTypeField.setVisible(false);
-            headphonesBatteryCapacityField.setVisible(false);
-            headphonesColorField.setVisible(false);
-            priceHeadphonesField.setVisible(false);
-        }
+    private EntityManagerFactory entityManagerFactory;
 
-        if (caseRadioButton.isSelected()) {
-            caseTypeField.setVisible(true);
-            caseMaterialField.setVisible(true);
-            caseColorField.setVisible(true);
-            priceCaseField.setVisible(true);
-        } else {
-            caseTypeField.setVisible(false);
-            caseMaterialField.setVisible(false);
-            caseColorField.setVisible(false);
-            priceCaseField.setVisible(false);
-        }
+    public MainWindow() {
+        instance = this;
+        entityManagerFactory = Persistence.createEntityManagerFactory("Shop");
     }
 
-    public void addRecord() {
-        if (smartphoneRadioButton.isSelected()) {
-            Smartphones smartphone = new Smartphones(productTitleField.getText(),
-                    productDescriptionField.getText(),
-                    Integer.parseInt(quantityField.getText()),
-                    Float.parseFloat(priceField.getText()),
-                    Float.parseFloat(smartphoneDiagonalField.getText()),
-                    Integer.parseInt(smartphoneBatteryCapacityField.getText()),
-                    Integer.parseInt(smartphoneMemoryCapacityField.getText()),
-                    smartphoneColorField.getText());
-            productAdminList.getItems().add(smartphone);
-        } else if (headphonesRadioButton.isSelected()) {
-            Headphones headphones = new Headphones(productTitleField.getText(),
-                    productDescriptionField.getText(),
-                    Integer.parseInt(quantityField.getText()),
-                    Float.parseFloat(priceField.getText()),
-                    headphonesTypeField.getText(),
-                    Integer.parseInt(headphonesBatteryCapacityField.getText()),
-                    smartphoneColorField.getText());
-            productAdminList.getItems().add(headphones);
-        } else if (caseRadioButton.isSelected()) {
-            Cases cases = new Cases(productTitleField.getText(),
-                    productDescriptionField.getText(),
-                    Integer.parseInt(quantityField.getText()),
-                    Float.parseFloat(priceField.getText()),
-                    caseTypeField.getText(),
-                    caseMaterialField.getText(),
-                    caseColorField.getText());
-            productAdminList.getItems().add(cases);
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        FXMLLoader loader = new FXMLLoader();
+        try {
+            AnchorPane anchorPane = loader.load(getClass().getResource("/com/example/javacourceproject/userTab.fxml"));
+            userTab.setContent(anchorPane);
+        } catch (IOException e) {
+            System.out.println("File not found");
         }
+
     }
 
-    public void updateRecord() {
-        Product product = productAdminList.getSelectionModel().getSelectedItem();
-        if (product instanceof Smartphones) {
-            Smartphones smartphones = (Smartphones) product;
-            smartphones.setTitle(productTitleField.getText());
-            smartphones.setDescription(productDescriptionField.getText());
-            smartphones.setPrice(Float.parseFloat(priceField.getText()));
-            smartphones.setQty(Integer.parseInt(quantityField.getText()));
-            smartphones.setDisplayDiagonal(Float.parseFloat(smartphoneDiagonalField.getText()));
-            smartphones.setBatteryCapacity(Integer.parseInt(smartphoneBatteryCapacityField.getText()));
-            smartphones.setMemoryCapacity(Integer.parseInt(smartphoneMemoryCapacityField.getText()));
-            smartphones.setColor(smartphoneColorField.getText());
-        } else if (product instanceof Headphones) {
-            Headphones headphones = (Headphones) product;
-            headphones.setTitle(productTitleField.getText());
-            headphones.setDescription(productDescriptionField.getText());
-            headphones.setPrice(Float.parseFloat(priceField.getText()));
-            headphones.setQty(Integer.parseInt(quantityField.getText()));
-            headphones.setType(smartphoneBatteryCapacityField.getText());
-            headphones.setBatteryCapacity(Integer.parseInt(smartphoneMemoryCapacityField.getText()));
-            headphones.setColor(headphonesColorField.getText());
-        } else if (product instanceof Cases) {
-            Cases cases = (Cases) product;
-            cases.setTitle(productTitleField.getText());
-            cases.setDescription(productDescriptionField.getText());
-            cases.setPrice(Float.parseFloat(priceField.getText()));
-            cases.setQty(Integer.parseInt(quantityField.getText()));
-            cases.setType(smartphoneBatteryCapacityField.getText());
-            cases.setMaterial(smartphoneMemoryCapacityField.getText());
-            cases.setColor(caseColorField.getText());
+    public void openAllTabs(boolean isAdminNow) {
+        shopTab.setDisable(false);
+
+        FXMLLoader loader = new FXMLLoader();
+        try {
+            AnchorPane anch3 = loader.load(MainWindow.class.getResource("/com/example/javacourceproject/shopTab.fxml"));
+            shopTab.setContent(anch3);
+        } catch (IOException e) {
+            System.out.println("File not found");
         }
+
+        if (isAdminNow) {
+            productTab.setDisable(false);
+            warehouseTab.setDisable(false);
+
+            loader = new FXMLLoader();
+            try {
+                AnchorPane anch1 = loader.load(MainWindow.class.getResource("/com/example/javacourceproject/productTab.fxml"));
+                productTab.setContent(anch1);
+            } catch (IOException e) {
+                System.out.println("File not found");
+            }
+
+            loader = new FXMLLoader();
+            try {
+                AnchorPane anch4 = loader.load(MainWindow.class.getResource("/com/example/javacourceproject/warehouseTab.fxml"));
+                warehouseTab.setContent(anch4);
+            } catch (IOException e) {
+                System.out.println("File not found");
+            }
+        }
+
+
     }
 
-    public void deleteRecord() {
-        Product product = productAdminList.getSelectionModel().getSelectedItem();
-        productAdminList.getItems().remove(product);
+    public void closeAllTabs() {
+        shopTab.setDisable(true);
+        productTab.setDisable(true);
+        warehouseTab.setDisable(true);
     }
 
 }
