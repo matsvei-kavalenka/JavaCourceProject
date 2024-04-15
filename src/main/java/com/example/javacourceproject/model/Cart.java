@@ -1,4 +1,5 @@
 package com.example.javacourceproject.model;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +8,6 @@ import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -22,16 +22,15 @@ public class Cart {
     private int id;
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Product> itemsToBuy = new ArrayList<>();
+    private List<Product> itemsToBuy;
     @ManyToOne
     private User customer;
     @ManyToOne
     private Manager manager;
-    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Comment> chat;
 
-    public void addItemToCart(Product product) {
-        itemsToBuy.add(product);
+    public Cart(User customer, Manager manager, List<Product> items) {
+        this.customer = customer;
+        this.manager = manager;
+        this.itemsToBuy = items;
     }
 }

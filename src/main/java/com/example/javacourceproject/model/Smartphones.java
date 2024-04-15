@@ -1,9 +1,14 @@
 package com.example.javacourceproject.model;
 
+import jakarta.persistence.Entity;
 import lombok.*;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
+
+@Entity
 public class Smartphones extends Product {
     private float displayDiagonal;
     private int batteryCapacity;
@@ -12,7 +17,7 @@ public class Smartphones extends Product {
     private String operationSystem;
 
     public Smartphones(String title, String description, int quantity, float price, float displayDiagonal, int batteryCapacity, int memoryCapacity, String color, String operationSystem) {
-        System.out.println("Title: " + title + "\n" + "Description: " + description + "\n" + "Quantity: " + quantity + "\n" + "Price: " + price + "\n" + "Display Diagonal: " + displayDiagonal + "\n" + "Battery Capacity: " + batteryCapacity + "\n" + "Memory Capacity: " + memoryCapacity + "\n" + "Color: " + color + "\n" + "OS: " + operationSystem + "\n");
+        super(title,description,quantity,price);
         this.displayDiagonal = displayDiagonal;
         this.batteryCapacity = batteryCapacity;
         this.memoryCapacity = memoryCapacity;
@@ -21,6 +26,6 @@ public class Smartphones extends Product {
     }
 
     public String genText() {
-        return "Name: " + title + " | Price: " + price + "\n" + description;
+        return "Name: " + title + "\nPrice: " + price + "\nDescription: " + description;
     }
 }

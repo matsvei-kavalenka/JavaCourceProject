@@ -24,17 +24,44 @@ public class Comment {
     private String commentTitle;
     private String commentBody;
     private LocalDate dateCreated;
+    private float rating;
     @ManyToOne()
     private Product whichProductCommented;
     @ManyToOne()
-    private Customer commentOwner;
+    private User commentOwner;
     @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Comment> replies;
     @ManyToOne()
     private Comment parentComment;
-    private float rating;
     @ManyToOne
     private Cart chat;
 
+    public Comment(String commentTitle, String commentBody, LocalDate dateCreated) {
+        this.commentTitle = commentTitle;
+        this.commentBody = commentBody;
+        this.dateCreated = dateCreated;
+    }
+
+
+    public Comment(String commentTitle, String commentBody, LocalDate dateCreated, float rating, Product whichProductCommented, User commentOwner) {
+        this.commentTitle = commentTitle;
+        this.commentBody = commentBody;
+        this.dateCreated = dateCreated;
+        this.rating = rating;
+        this.whichProductCommented = whichProductCommented;
+        this.commentOwner = commentOwner;
+    }
+
+    public Comment(String commentTitle, String commentBody, LocalDate dateCreated, float rating, Product whichProductCommented, User commentOwner, List<Comment> replies, Comment parentComment, Cart chat) {
+        this.commentTitle = commentTitle;
+        this.commentBody = commentBody;
+        this.dateCreated = dateCreated;
+        this.whichProductCommented = whichProductCommented;
+        this.commentOwner = commentOwner;
+        this.replies = replies;
+        this.parentComment = parentComment;
+        this.rating = rating;
+        this.chat = chat;
+    }
 }

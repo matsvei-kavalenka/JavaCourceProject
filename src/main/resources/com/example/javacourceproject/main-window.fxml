@@ -5,25 +5,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javacourceproject.fxController.MainWindow">
-    <children>
-        <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="650.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab fx:id="shopTab" disable="true" text="Shop">
-                    <fx:include source="shopTab.fxml" />
-                </Tab>
-                <Tab fx:id="productTab" disable="true" text="Products">
-                    <fx:include source="productTab.fxml" />
-                </Tab>
-                <Tab fx:id="userTab" text="Users">
-                    <fx:include source="userTab.fxml" />
-                </Tab>
-                <Tab disable="true" text="Orders">
+    <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="650.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="shopTab" disable="true" text="Shop">
+            <fx:include source="shopTab.fxml" />
+        </Tab>
+        <Tab fx:id="productTab" disable="true" text="Products">
+            <fx:include source="productTab.fxml" />
+        </Tab>
+        <Tab fx:id="userTab" text="Users">
+            <fx:include source="userTab.fxml" />
+        </Tab>
 
-                </Tab>
-                <Tab fx:id="warehouseTab" disable="true" text="Warehouse">
-
-                </Tab>
-            </tabs>
-        </TabPane>
-    </children>
+        <Tab fx:id="warehouseTab" disable="true" text="Warehouse">
+            <fx:include source="warehouseTab.fxml" />
+        </Tab>
+    </TabPane>
 </AnchorPane>
